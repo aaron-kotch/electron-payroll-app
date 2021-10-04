@@ -1,0 +1,118 @@
+.tile-canvas {
+    display: flex;
+    flex-direction: column;
+}
+
+/* exposed tile */
+.tile {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+    border-top: solid;
+    border-top-color: #D2D2D2;
+    border-width: thin;
+}
+
+#name {
+    flex-grow: 5;
+    width: 40%;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#gross {
+    width: 20%;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#deduction {
+    width: 20%;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#net {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#net-wrapper {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-icon-back {
+    background: transparent;
+    cursor: pointer;
+}
+
+.fa-chevron-down {
+    font-size: 12px;
+}
+
+/* hidden tile */
+.hidden-tile {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 28px 28px 28px;
+    padding: 24px 0px;
+    background-color: #FAFAFA;
+    border-radius: 8px;
+}
+
+.salary-section {
+    width: 30%;
+    padding: 0 32px;
+    border: none;
+    border-right: solid;
+    border-right-color: #D2D2D2;
+    border-width: 1px;
+}
+
+#tax-title {
+    margin-top: 28px;
+}
+
+.employee-section {
+    width: 30%;
+    padding: 0 32px;
+    border: none;
+    border-right: solid;
+    border-right-color: #D2D2D2;
+    border-width: 1px;
+}
+
+#others-title {
+    margin-top: 28px;
+}
+
+.employer-section {
+    width: 30%;
+    padding: 0 32px;
+}
+
+.section-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: #707070;
+    padding-bottom: 8px;
+}
+
+.section-row {
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.section-row-title {
+    font-weight: 600;
+}

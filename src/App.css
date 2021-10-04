@@ -1,38 +1,228 @@
-.App {
-  text-align: center;
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*:focus {
+    outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.main-content {
+    margin-left: 70px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 16px;
+}
+
+.header-title {
+    padding-left: 12px;
+    flex-grow: 5;
+    font-size: 15px;
+}
+
+.input {
+    
+    font-size: 10px;
+    background-color: #F2F2F6;
+    border: none;
+    border-style: none;
+    border-radius: 4px;
+    padding: 8px;
+    padding-left: 20px;
+    width: 200px;
+    margin: 0px 8px;
+}
+
+.input:focus, .popup-input:focus {
+    border: none;
+}
+
+.button {
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background-color: #2979FF;
+    padding: 8px 16px;
+    margin: 0 4px;
+    color: white;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+#import-button {
+    background-color: #217346;
+}
+
+/* Popup style */
+.popup-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: #00000050;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
   }
+   
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 24px;
+    border: none;
+    overflow: visible;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.popup-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+   
+.close-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: #ededed;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    border: none;
+    font-size: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.fa-xmark {
+    font-size: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.popup-input {
+    font-size: 13px;
+    background-color: #F2F2F6;
+    border: none;
+    border-style: none;
+    border-radius: 4px;
+    padding: 12px 8px;
+    padding-left: 20px;
+    margin-top: 8px;
+    margin-bottom: 0px;
 }
+
+.popup-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.input-title {
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 24px;
+}
+
+.popup-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#salary-input {
+    width: 100%;
+}
+
+.popup-column {
+    display: table-column;
+}
+
+#salary-column {
+    padding-right: 12px;
+}
+
+.popup-button {
+    border-radius: 4px;
+    border: none;
+    background-color: #2979FF;
+    padding: 12px 24px;
+    margin-top: 48px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* payroll container */
+#empty-payroll {
+    padding: 28px;
+    font-size: 12px;
+    border: none;
+    border-top: solid;
+    border-top-color: #D2D2D2;
+    border-width: thin;
+}
+
+.payroll-header {
+    padding: 28px;
+    margin-bottom: 20px;
+}
+
+/* payroll list */
+.payroll-list {
+    width: 100%;
+    max-width: 1200px;
+    font-family: 'Work Sans', sans-serif;
+    background-color: #FFFFFF;
+    margin: 24px 28px;
+    border-radius: 8px;
+}
+
+#payroll-month {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.payroll-title-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 10px;
+    font-weight: 500;
+    color: #707070;
+    padding: 0px 28px;
+    padding-bottom: 12px;
+}
+
+#column-name {
+    width: 40%;
+}
+
+#column-gross {
+    width: 20%;
+}
+
+#column-deduction {
+    width: 20%;
+}
+
+#column-net {
+    width: 20%;
+}
+
+.payroll-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
