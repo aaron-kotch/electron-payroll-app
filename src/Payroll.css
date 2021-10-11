@@ -1,11 +1,14 @@
 .tile-canvas {
     display: flex;
     flex-direction: column;
+    height: auto;
+    max-height: 500px;
+    transition: max-height 0.3s ease-out;
 }
 
 /* exposed tile */
 .tile {
-    padding: 24px 28px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,27 +18,34 @@
     border-width: thin;
 }
 
+#tile-expanded {
+    max-height: 100px;
+    transition: max-height 0.5s ease-out;
+}
+
 #name {
-    flex-grow: 5;
     width: 40%;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
+    margin-right: 16px;
 }
 
 #gross {
     width: 20%;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
+    margin-right: 16px;
 }
 
 #deduction {
     width: 20%;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
+    margin-right: 16px;
 }
 
 #net {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
 }
 
@@ -46,9 +56,24 @@
     align-items: center;
 }
 
-.close-icon-back {
+.close-icon-button {
     background: transparent;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#close-icon-inactive {
+    font-size: 12px;
+    transition: transform 0.2s ease-out;
+}
+
+#close-icon-active {
+    font-size: 12px;
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
 }
 
 .fa-chevron-down {
@@ -59,16 +84,14 @@
 .hidden-tile {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    margin: 0 28px 28px 28px;
+    justify-content: space-evenly;
     padding: 24px 0px;
     background-color: #FAFAFA;
-    border-radius: 8px;
 }
 
 .salary-section {
     width: 30%;
-    padding: 0 32px;
+    padding: 0 20px;
     border: none;
     border-right: solid;
     border-right-color: #D2D2D2;
@@ -81,7 +104,7 @@
 
 .employee-section {
     width: 30%;
-    padding: 0 32px;
+    padding: 0 20px;
     border: none;
     border-right: solid;
     border-right-color: #D2D2D2;
@@ -94,7 +117,7 @@
 
 .employer-section {
     width: 30%;
-    padding: 0 32px;
+    padding: 0 20px;
 }
 
 .section-title {

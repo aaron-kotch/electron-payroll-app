@@ -1,0 +1,168 @@
+.view {
+    padding: 36px 40px;
+
+}
+
+.view-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.view-subtitle {
+    font-weight: 500;
+    font-size: 12px;
+    color: #B1B9C1;
+}
+
+.payroll-header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+
+.payroll-cycle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.payroll-cycle p {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.cycle-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 24px;
+    background: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px #E3E5E6;
+}
+
+.payroll-cycle p {
+    font-size: 12px;
+}
+
+.cycle-icon {
+    font-size: 8px;
+    margin-left: 20px;
+    color: #B1B9C1;
+}
+
+.report-button {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #FFFFFF;
+    padding: 8px 20px;
+    border-radius: 4px;
+    background-color: #4084F8;
+    color: #FFFFFF;
+}
+
+.report-button p {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-left: 16px;
+}
+
+.button-icon {
+    font-size: 12px;
+}
+
+/* table view */
+.payroll-view-table {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.table-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px 20px;
+}
+
+.table-header p {
+    font-size: 11px;
+    color: #62646D;
+}
+
+#payroll-name {
+    width: 40%;
+    margin-right: 16px;
+}
+
+#payroll-gross {
+    width: 20%;
+    margin-right: 16px;
+}
+
+#payroll-deduction {
+    width: 20%;
+    margin-right: 16px;
+}
+
+#payroll-net {
+    width: 20%;
+}
+
+.empty-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-top: solid #D2D2D2 thin;
+    height: 300px;
+}
+
+.empty-list-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.folder-icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    font-size: 48px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.folder-icon:hover {
+    background-color: #F3F5F7;
+}
+
+.folder-icon:active {
+    background-color: #86C3FF;
+}
+
+.empty-desc-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.empty-desc-subtitle {
+    font-size: 11px;
+    color: #B1B9C1;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+

@@ -13,7 +13,7 @@ function createWindow() {
     height: 600,
     minWidth: 980,
     minHeight: 600,
-    backgroundColor: '#FAFAFC',
+    backgroundColor: '#F6F8F9',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -24,19 +24,23 @@ function createWindow() {
 
   win.removeMenu();
 
+  // handles fiel picking
   ipcMain.handle('open-file', async () => {
+
+    let data = []
     
     await dialog.showOpenDialog({
-      properties: ['openFile']
+      properties: ['openFile'],
+      filters: [{name: 'Microsoft Excel Worksheet', extensions: ['xls', 'xlsx']}]
     }).then(result => {
       if (result.canceled === false) {
-        dataFilePath = result.filePaths[0]
+        data = getPayroll(result.filePaths[0])
       }
     }).catch(err => {
-      console.log(err);
+      console.log(err)
     });
 
-    return dataFilePath;
+    return data
   })
 
   ipcMain.handle('calculate-payroll', (event, salary) => {
@@ -64,6 +68,50 @@ function createWindow() {
   if (isDev) {
     win.webContents.openDevTools({ mode: 'detach' });
   }
+}
+
+function getPayroll(filePath) {
+
+  const file = reader.readFile(filePath)
+  
+  let data = []
+
+  const sheets = file.SheetNames
+
+  var wb = file.Sheets['Kijal']
+
+  wb['!ref'] = 'A6:T15'
+
+  const temp = reader.utils.sheet_to_json(wb, {
+    header: [
+      "no", 
+      "name", 
+      "basic_salary", 
+      "allowance", 
+      "gross_salary", 
+      "baituilmal", 
+      "pcb", 
+      "cp38",
+      "employee_epf",
+      "employee_socso",
+      "employee_eis",
+      "other_deduction",
+      "total_deduction",
+      "net_salary",
+      "employer_epf",
+      "employer_socso",
+      "employer_eis",
+      "total_epf",
+      "total_socso",
+      "total_eis"
+    ]
+  })
+
+  temp.forEach((item) => {
+    data.push(item)
+  })
+
+  return data
 }
 
 function readExcel(filePath, salary) {

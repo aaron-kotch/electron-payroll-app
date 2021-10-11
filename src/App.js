@@ -1,10 +1,12 @@
 import React,  { useState, useRef } from "react";
-import PayrollList from "./PayrollList";
-import { v4 as uuid} from 'uuid'
-import './App.css'
+import PayrollView from "./PayrollView";
+import { v4 as uuid} from 'uuid';
 import Popup from "./PopUp";
 import Sidebar from "./Sidebar";
-const {ipcRenderer} = window.require('electron');
+import Quickbar from './QuickBar'
+import './App.css';
+
+const { ipcRenderer } = window.require('electron');
 
 const App = () => {
 
@@ -53,11 +55,6 @@ const App = () => {
     })
   }
 
-  async function openFile() {
-    const result = await ipcRenderer.invoke('open-file');
-    console.log(result)
-  }
-
   function getMonth() {
     const date = new Date()
     const month = date.toLocaleString('default', { month: 'long'})
@@ -69,48 +66,18 @@ const App = () => {
 
     <div>
 
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+      <Sidebar />
+
+      <Quickbar />
+
+
+      {/* TODO: Put page (payroll) into individual page, will switch view here (Database/ Settings) */}
 
       <div className="main-content">
-        <div className="header">
 
-  <h1 className="header-title">Payroll</h1>
+        <PayrollView />
 
-  <input ref={listInputRef} placeholder="Search" type="text" className="input" />
-
-  <button onClick={togglePopup} className="button">
-    Add Staff
-  </button>
-
-  <button onClick={openFile} className="button" id="import-button">
-    Import Salary Sheet
-  </button>
-  </div>
-
-        <div className="payroll-wrapper">
-
-        <div className="payroll-list">
-
-          <div className="payroll-header">
-            <p id="payroll-month">{getMonth()} {new Date().getFullYear()}</p>
-          </div>
-
-          <div className="payroll-title-row">
-
-            <p id="column-name">Name</p>
-            <p id="column-gross">Gross Salary</p> 
-            <p id="column-deduction">Total Deduction</p> 
-            <p id="column-net">Net Salary</p> 
-          
-          </div>
-
-          {lists.length === 0 ? <p id="empty-payroll">List is empty</p>  : <PayrollList list={lists} />}
-        </div>
-        
-      </div>
-        {isOpen && <Popup handleList={handleAddList} handleClose={togglePopup}/>}
+        {/* {isOpen && <Popup handleList={handleAddList} handleClose={togglePopup}/>} */}
       </div>
 
     </div>
