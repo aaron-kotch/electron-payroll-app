@@ -1,0 +1,168 @@
+.simplebar-track{
+    opacity: 0.3;
+    margin: 2px 2px;
+}
+
+.payroll-report-wrapper {
+    position: fixed;
+    z-index: 1;
+    width: auto;
+    right: 53px;
+    left: 240px;
+    height: 100%;
+    background-color: #FFF;
+    
+}
+
+.payroll-report {
+    padding: 28px 40px;
+    
+}
+
+.view-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px 16px;
+}
+
+.row-space-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 12px 0;
+    border: solid #E6E7EE 1px;
+}
+
+.view-button {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-out;
+}
+
+.view-button:hover {
+    background-color: #E9F3FB;
+    transition: background-color 0.2s ease-out;
+}
+
+.view-button p {
+    font-size: 10px;
+    font-weight: 600;
+    color: #4084F5;
+}
+
+.view-column {
+    margin-top: 32px;
+    background-color: #F3F5F7;
+    
+}
+
+#payroll-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.report-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.close-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #F3F5F7;
+}
+
+#close-icon {
+    font-size: 16px;
+}
+
+.close-text {
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 4px;
+    color: #000;
+}
+
+.report-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #F3F5F7;
+}
+
+#loading-icon {
+    font-size: 32px;
+    color: #2979FF;
+    font-weight: 600;
+}
+
+.loading-icon {
+    font-size: 15px;
+}
+
+.report-row {
+    margin-top: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.report-row p {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 16px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #loading-icon {
+        animation: loading-icon-spin infinite 1.2s linear;
+    }
+}
+
+@keyframes loading-icon-spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+}
+
+h5 {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#folder-icon {
+    font-size: 20px;
+}
+
+#section-title {
+    margin-top: 36px;
+}
