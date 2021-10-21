@@ -1,7 +1,9 @@
 const path = require('path');
-const { ipcMain, ipcRenderer, app, BrowserWindow, dialog } = require('electron');
+const { ipcMain, app, BrowserWindow, dialog } = require('electron');
 const isDev = require('electron-is-dev');
 const reader = require('xlsx');
+const BankStatementGenerator = require("./pdf/BankStatement")
+const EPFGenerator = require('./pdf/EPFGenerator');
 
 function createWindow() {
 
@@ -13,10 +15,10 @@ function createWindow() {
     height: 600,
     minWidth: 980,
     minHeight: 600,
-    backgroundColor: '#F6F8F9',
+    backgroundColor: '#FFFFFF',
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true,
+      enableRemoteModule: false,
       contextIsolation: false,
     },
     
@@ -28,7 +30,7 @@ function createWindow() {
   ipcMain.handle('open-file', async () => {
 
     let data = []
-    
+
     await dialog.showOpenDialog({
       properties: ['openFile'],
       filters: [{name: 'Microsoft Excel Worksheet', extensions: ['xls', 'xlsx']}]
@@ -41,6 +43,21 @@ function createWindow() {
     });
 
     return data
+  })
+
+  ipcMain.handle('generate-bank-statement', (event, list) => {
+    
+    const bSG = new BankStatementGenerator(list)
+    bSG.generate()
+    console.log("BANK STATEMENT PRINT")
+  })
+
+  ipcMain.handle('generate-epf-statement', (event, list) => {
+    
+    const epfG = new EPFGenerator(list)
+    epfG.generate()
+    console.log("EPF STATEMENT PRINT")
+    
   })
 
   ipcMain.handle('calculate-payroll', (event, salary) => {
@@ -89,7 +106,7 @@ function getPayroll(filePath) {
       "basic_salary", 
       "allowance", 
       "gross_salary", 
-      "baituilmal", 
+      "baitulmal", 
       "pcb", 
       "cp38",
       "employee_epf",

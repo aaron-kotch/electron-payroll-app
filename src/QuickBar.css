@@ -7,11 +7,9 @@
     height: 100%;
     justify-content: flex-start;
     align-items: center;
+    /* box-shadow: 1px 0 10px #E3E5E6; */
+    border-left: solid #E6E7EE thin;
+    padding: 36px 28px;
     background-color: #FFFFFF;
-    box-shadow: 1px 0 10px #E3E5E6;
-    padding: 36px 20px;
-}
-
-.quickbar-icon {
-
+    z-index: 2;
 }

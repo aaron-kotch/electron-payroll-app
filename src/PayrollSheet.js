@@ -57,21 +57,21 @@ export default function PayrollSheet({listItem}) {
                     <div className="section-row">
 
                         <p className="section-row-title">EPF</p>
-                        <p>{listItem.employee_epf}</p>
+                        <p>{parseFloat(listItem.employee_epf).toFixed(2)}</p>
 
                     </div>
 
                     <div className="section-row">
 
                         <p className="section-row-title">SOCSO</p>
-                        <p>{listItem.employee_socso}</p>
+                        <p>{parseFloat(listItem.employee_socso).toFixed(2)}</p>
 
                     </div>
 
                     <div className="section-row">
 
                         <p className="section-row-title">EIS</p>
-                        <p>{listItem.employee_eis}</p>
+                        <p>{parseFloat(listItem.employee_eis).toFixed(2)}</p>
 
                     </div>
 
@@ -82,14 +82,14 @@ export default function PayrollSheet({listItem}) {
                         <div className="section-row">
 
                             <p className="section-row-title">ZAKAT</p>
-                            <p>{listItem.zakat}</p>
+                            <p>{listItem.zakat === isNaN ? parseFloat(listItem.zakat).toFixed(2) : "0.00"}</p>
 
                         </div>
 
                         <div className="section-row">
 
                             <p className="section-row-title">BAITULMAL</p>
-                            <p>{listItem.cp38}</p>
+                            <p>{parseFloat(listItem.baitulmal).toFixed(2)}</p>
 
                         </div>
                     </div>
@@ -103,21 +103,21 @@ export default function PayrollSheet({listItem}) {
                     <div className="section-row">
 
                         <p className="section-row-title">EPF</p>
-                        <p>{listItem.employer_epf}</p>
+                        <p>{parseFloat(listItem.employer_epf).toFixed(2)}</p>
 
                     </div>
 
                     <div className="section-row">
 
                         <p className="section-row-title">SOCSO</p>
-                        <p>{listItem.employer_socso}</p>
+                        <p>{parseFloat(listItem.employer_socso).toFixed(2)}</p>
 
                     </div>
 
                     <div className="section-row">
 
                         <p className="section-row-title">EIS</p>
-                        <p>{listItem.employer_eis}</p>
+                        <p>{parseFloat(listItem.employer_eis).toFixed(2)}</p>
 
                     </div>
                 </div>

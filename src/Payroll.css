@@ -1,46 +1,67 @@
 .tile-canvas {
     display: flex;
     flex-direction: column;
-    height: auto;
-    max-height: 500px;
-    transition: max-height 0.3s ease-out;
+    border-top: solid #EBEBEB thin;
 }
 
 /* exposed tile */
 .tile {
-    padding: 24px 20px;
+    padding: 36px 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: none;
-    border-top: solid;
-    border-top-color: #D2D2D2;
-    border-width: thin;
+    
 }
 
 #tile-expanded {
     max-height: 100px;
-    transition: max-height 0.5s ease-out;
+}
+
+.index-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.index-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: #439D4B;
+}
+
+#id {
+    font-size: 8px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+#name-wrapper {
+    width: 50%;
+    margin-right: 16px;
 }
 
 #name {
-    width: 40%;
-    font-size: 12px;
-    font-weight: 500;
-    margin-right: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    
 }
 
-#gross {
+#position {
     width: 20%;
-    font-size: 12px;
-    font-weight: 400;
-    margin-right: 16px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #B1B9C1;
 }
 
 #deduction {
     width: 20%;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
     margin-right: 16px;
 }
 
@@ -84,14 +105,18 @@
 .hidden-tile {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    padding: 24px 0px;
-    background-color: #FAFAFA;
+    justify-content: space-between;
+    padding: 28px 16px;
+    background-color: #F6F9F6;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    /* box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.25); */
 }
 
 .salary-section {
     width: 30%;
-    padding: 0 20px;
+    padding-right: 28px;
+    padding-left: 12px;
     border: none;
     border-right: solid;
     border-right-color: #D2D2D2;
@@ -106,9 +131,6 @@
     width: 30%;
     padding: 0 20px;
     border: none;
-    border-right: solid;
-    border-right-color: #D2D2D2;
-    border-width: 1px;
 }
 
 #others-title {
@@ -117,7 +139,11 @@
 
 .employer-section {
     width: 30%;
-    padding: 0 20px;
+    padding-left: 28px;
+    padding-right: 12px;
+    border-left: solid;
+    border-left-color: #D2D2D2;
+    border-width: 1px;
 }
 
 .section-title {

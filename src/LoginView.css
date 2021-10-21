@@ -1,0 +1,108 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.login-box {
+    background-color: #FFFFFF;
+    padding: 32px 32px;
+    border-radius: 12px;
+}
+
+#login-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F8F9;
+    border-radius: 50%;
+    padding: 12px;
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+#header-icon {
+    font-size: 24px;
+}
+
+#login-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#login-subtitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: #B1B9C1;
+}
+
+.textbox-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+.textbox {
+    width: 300px;
+    padding: 12px;
+    border: solid 1px #B1B9C1;
+    border-radius: 8px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+input, label {
+    color: #585858;
+}
+
+#button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 64px;
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    background-color: #4084F8;
+    padding: 12px 20px;
+}
+
+#button p {
+    font-size: 15px;
+}
+
+.loading-icon {
+    font-size: 15px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .loading-icon {
+        animation: loading-icon-spin infinite 1s linear;
+    }
+}
+
+@keyframes loading-icon-spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,6 +1,11 @@
+.simplebar-track{
+    opacity: 0.3;
+    margin: 2px 2px;
+}
+
 .view {
     padding: 36px 40px;
-
+    user-select: none;
 }
 
 .view-title {
@@ -19,85 +24,146 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 40px 0;
-}
-
-.payroll-cycle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.payroll-cycle p {
-    font-size: 10px;
-    font-weight: 500;
+    margin-top: 64px;
+    border: solid #E6E7EE 1.5px;
+    border-radius: 8px;
+    /* box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.15); */
 }
 
 .cycle-selector {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 24px;
-    background: #FFFFFF;
-    padding: 8px 16px;
-    border-radius: 4px;
-    box-shadow: 1px 1px 5px #E3E5E6;
-}
-
-.payroll-cycle p {
-    font-size: 12px;
-}
-
-.cycle-icon {
-    font-size: 8px;
-    margin-left: 20px;
-    color: #B1B9C1;
-}
-
-.report-button {
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: #FFFFFF;
-    padding: 8px 20px;
-    border-radius: 4px;
-    background-color: #4084F8;
-    color: #FFFFFF;
+    padding: 10px 20px;
+    border-right: solid #EBEBEB 1.5px;
 }
 
-.report-button p {
+.cycle-selector p {
+    flex: 3;
     font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: #62646D;
+}
+
+#selected-month-inactive {
+    transition: box-shadow 0.15s ease-out;
+}
+
+#selected-month-active {
+    box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.15);
+    transition: box-shadow 0.15s ease-out;
+}
+
+.month-picker {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    background-color: #FFFFFF;
+    margin-top: 4px;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.15);
+}
+
+#month-canvas {
+    display: flex;
+    height: 64px;
+    width: 64px;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+#month-canvas:hover {
+    background-color: #F3F5F7;
+    color: #52AA5E;
+}
+
+.month {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#cycle-leading {
+    font-size: 16px;
+    margin-right: 16px;
+    color: #B1B9C1;
+}
+
+#cycle-trailing {
+    font-size: 16px;
     margin-left: 16px;
 }
 
-.button-icon {
+#button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#reset-button {
+    padding: 0 20px;
+}
+
+#reset-button p {
+    color: #FF5A5F;
+}
+
+#reset-icon {
+    font-size: 16px;
+    margin-right: 16px;
+    color: #FF5A5F;
+}
+
+#report-button {
+    border: none;
+    padding: 0 20px;
+}
+
+#report-button p {
     font-size: 12px;
+    font-weight: 500;
+    color: #52AA5E;
+}
+
+#button-leading {
+    font-size: 16px;
+    margin-right: 12px;
+    color: #52AA5E;
 }
 
 /* table view */
-.payroll-view-table {
-    background-color: #FFFFFF;
-    border-radius: 8px;
-}
-
 .table-header {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: 16px 20px;
+    margin-top: 64px;
+    padding: 20px 0;
+    background-color: #FFFFFF;
+    border-top: solid #E6E7EE thin;
 }
 
 .table-header p {
     font-size: 11px;
+    font-weight: 500;
     color: #62646D;
 }
 
+#payroll-id {
+    width: 15px;
+    margin-right: 20px;
+}
+
 #payroll-name {
-    width: 40%;
+    width: 50%;
     margin-right: 16px;
 }
 
@@ -119,9 +185,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
-    border-top: solid #D2D2D2 thin;
     height: 300px;
+    background-color: #F6F8F9;
+    margin-top: 4px;
+    border-radius: 8px;
 }
 
 .empty-list-content {
@@ -129,6 +196,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .folder-icon {
@@ -165,4 +233,40 @@
     margin-bottom: 16px;
 }
 
+.loading-wrapper {
+    position: fixed;
+    z-index: 1;
+    width: auto;
+    right: 53px;
+    left: 240px;
+    height: 100%;
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.loading-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #F3F5F7;
+    margin-right: 12px;
+}
+
+.loading-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#loading-text {
+    font-size: 15px;
+    font-weight: 500;
+}
 

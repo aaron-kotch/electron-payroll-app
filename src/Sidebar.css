@@ -1,44 +1,109 @@
 .sidebar-wrapper {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     left: 0;
     width: 240px;
     height: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     background-color: #FFFFFF;
-    box-shadow: 1px 0 2px #E3E5E6;
-    padding-left: 48px;
-    padding-top: 36px;
+    /* box-shadow: 1px 0 2px #E3E5E6; */
+    user-select: none;
+    padding: 0 28px;
+    border-right: solid #E6E7EE thin;
 }
 
 .sidebar-title {
     font-weight: 600;
     font-size: 18px;
-    margin-bottom: 40px;
+    padding-left: 12px;
+    padding-top: 36px;
+    margin-bottom: 32px;
 }
 
 .payroll-icon {
-    font-size: 18px;
+    font-size: 15px;
     margin-right: 24px;
 }
 
+.payroll-icon-active {
+    font-size: 15px;
+    margin-right: 24px;
+    color: #2979ff;
+}
+
+
+.sidebar-top {
+    min-width: 100%;
+    max-width: 100%;
+}
+
 .sidebar-row {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
-    color: #62646D;
+    color: #141416;
+    padding: 12px 20px;
+    margin: 4px 0;
 }
 
 .sidebar-row p {
     font-size: 12px;
     font-weight: 500;
-    margin: 12px 0;
 }
 
 
-.fa-circle-dollar-to-slot {
-    color: #2979FF;
+#unselected:hover {
+    background-color: #DBDEE6;
+    border-radius: 8px;
+}
+
+#selected {
+    background-color: #E9F3FB;
+    border-radius: 8px;
+}
+
+#unselected {
+    background-color: transparent;
+}
+
+#profile-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #dcedc8;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+#profile-icon:hover {
+    box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.55);
+}
+
+#profile-icon:active {
+    box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.10);
+}
+
+.sidebar-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+#user-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#user-role {
+    font-size: 12px;
+    font-weight: 500;
+    color: #B1B9C1;
 }
