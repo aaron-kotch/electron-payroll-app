@@ -4,6 +4,7 @@ import { BiReceipt } from 'react-icons/bi'
 import { CgDatabase } from 'react-icons/cg'
 import { RiSettings4Line } from 'react-icons/ri'
 import { FcBusinessman } from 'react-icons/fc'
+import { HiOutlineClock } from 'react-icons/hi'
 import { app } from './Firebase'
 import { getAuth, signOut } from 'firebase/auth'
 import { userContext } from './UserContext'
@@ -25,19 +26,23 @@ export default function Sidebar({ currView }) {
 
         switch (index) {
             case 0:
-                setSelected([true, false, false])
+                setSelected([true, false, false, false])
                 currView("payroll")
                 break
             case 1:
-                setSelected([false, true, false])
-                currView("database")
+                setSelected([false, true, false, false])
+                currView("records")
                 break
             case 2:
-                setSelected([false, false, true])
-                currView("settings")
+                setSelected([false, false, true, false])
+                currView("history")
                 break
+            case 3:
+                setSelected([false, false, false, true])
+                currView("settings")
+            break
             default:
-                setSelected([true, false, false])
+                setSelected([true, false, false, false])
                 currView("payroll")
         }
         
@@ -58,11 +63,16 @@ export default function Sidebar({ currView }) {
 
                     <div className="sidebar-row" onMouseDown={() => {setSelectedState(1)}} id={isSelected[1] ? "selected" : "unselected"}>
                         <CgDatabase className={isSelected[1] ? "payroll-icon-active" : "payroll-icon"}/>
-                        <p>Database</p>
+                        <p>Records</p>
                     </div>
 
                     <div className="sidebar-row" onMouseDown={() => {setSelectedState(2)}} id={isSelected[2] ? "selected" : "unselected"}>
-                        <RiSettings4Line className={isSelected[2] ? "payroll-icon-active" : "payroll-icon"}/>
+                        <HiOutlineClock className={isSelected[2] ? "payroll-icon-active" : "payroll-icon"}/>
+                        <p>Activities</p>
+                    </div>
+
+                    <div className="sidebar-row" onMouseDown={() => {setSelectedState(3)}} id={isSelected[3] ? "selected" : "unselected"}>
+                        <RiSettings4Line className={isSelected[3] ? "payroll-icon-active" : "payroll-icon"}/>
                         <p>Settings</p>
                     </div>
                 </div>

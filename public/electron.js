@@ -2,8 +2,13 @@ const path = require('path');
 const { ipcMain, app, BrowserWindow, dialog } = require('electron');
 const isDev = require('electron-is-dev');
 const reader = require('xlsx');
+const shell = require('electron').shell
 const BankStatementGenerator = require("./pdf/BankStatement")
 const EPFGenerator = require('./pdf/EPFGenerator');
+const PaySlipGenerator = require('./pdf/PaySlip');
+const EISGenerator = require('./pdf/EISGenerator');
+const SOCSOGenerator = require('./pdf/SocsoGenerator');
+const ZakatGenerator = require('./pdf/ZakatGenerator');
 
 function createWindow() {
 
@@ -14,7 +19,7 @@ function createWindow() {
     width: 900,
     height: 600,
     minWidth: 980,
-    minHeight: 600,
+    minHeight: 640,
     backgroundColor: '#FFFFFF',
     webPreferences: {
       nodeIntegration: true,
@@ -60,6 +65,44 @@ function createWindow() {
     
   })
 
+  ipcMain.handle('generate-socso-statement', (event, list) => {
+    
+    const socsoG = new SOCSOGenerator(list)
+    socsoG.generate()
+    console.log("SOCSO STATEMENT PRINT")
+    
+  })
+
+  ipcMain.handle('generate-eis-statement', (event, list) => {
+    
+    const eisG = new EISGenerator(list)
+    eisG.generate()
+    console.log("EIS STATEMENT PRINT")
+    
+  })
+
+  ipcMain.handle('generate-zakat-statement', (event, list) => {
+    
+    const zG = new ZakatGenerator(list)
+    zG.generate()
+    console.log("ZAKAT STATEMENT PRINT")
+    
+  })
+
+  ipcMain.handle('generate-baitulmal-statement', (event, list) => {
+    
+    const blG = new ZakatGenerator(list)
+    blG.generate()
+    console.log("BAITULMAL STATEMENT PRINT")
+    
+  })
+
+  ipcMain.handle('generate-payslip', async (event, staff) => {
+    const psG = new PaySlipGenerator(staff)
+    psG.generate()
+    console.log(`PAYSLIP PRINT FOR ${staff.name}`,)
+  })
+
   ipcMain.handle('calculate-payroll', (event, salary) => {
 
     let result = []
@@ -100,6 +143,7 @@ function getPayroll(filePath) {
   wb['!ref'] = 'A6:T15'
 
   const temp = reader.utils.sheet_to_json(wb, {
+    defval: "",
     header: [
       "no", 
       "name", 

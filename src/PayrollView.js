@@ -4,11 +4,11 @@ import './PayrollView.css'
 import PayrollReport from './PayrollReport'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-import { BsFillPlayFill } from 'react-icons/bs'
+import { BsFillPlayFill, BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import { FcOpenedFolder,  FcFolder, FcCalendar } from 'react-icons/fc'
 import { GrRotateLeft } from 'react-icons/gr'
 import { AiOutlineLoading } from 'react-icons/ai'
-import { getFirestore, getDocs, doc, setDoc, collection, query, where } from 'firebase/firestore'
+import { getFirestore, getDocs, doc, addDoc, setDoc, collection, query, where } from 'firebase/firestore'
 import moment from 'moment'
 
 const { ipcRenderer } = window.require('electron');
@@ -25,10 +25,17 @@ const PayrollView = () => {
     const [list, setList] = useState([])
     const [processedList, setProcessedList] = useState([{}])
     const [currentMonth, setCurrentMonth] = useState("OCT")
+    const [currentMonthLong, setCurrentMonthLong] = useState("OCTOBER")
+    const [currentYear, setCurrentYear] = useState(2021)
     const [isSelectingMonth, setSelectingMonth] = useState(false)
     const monthList = [
         "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
         "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    ]
+
+    const monthListLong = [
+        "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
     ]
 
     async function openFile() {
@@ -50,8 +57,17 @@ const PayrollView = () => {
         setSelectingMonth(false)
     }
 
+    const decreaseYear = () => {
+        setCurrentYear(currentYear - 1)
+    }
+
+    const increaseYear = () => {
+        setCurrentYear(currentYear + 1)
+    }
+
     const selectMonth = (month) => {
-        setCurrentMonth(month)
+        setCurrentMonth(monthList[month])
+        setCurrentMonthLong(monthListLong[month])
         setSelectingMonth(false)
     }
 
@@ -74,43 +90,6 @@ const PayrollView = () => {
         }
     }, [isSelectingMonth])
 
-    const writeToDatabase = () => {
-
-        const dateToday = moment().format("MMMM-YYYY").toUpperCase()
-
-        list.forEach(async(item) => {
-
-            console.log("START item: ", item.name)
-
-            const q = query(staffRef, where("name", "==", item.name))
-
-            const querySnapshot = await getDocs(q)
-            querySnapshot.forEach(async(queryDoc) => {
-                console.log(queryDoc.id,  " => ", queryDoc.data())
-                await setDoc(doc(db, "staffs", queryDoc.id, "pay-record", dateToday), {
-                    allowance: item.allowance,
-                    baitulmal: item.baitulmal,
-                    basic_salary: item.basic_salary,
-                    cp38: item.cp38,
-                    employee_eis: item.employee_eis,
-                    employee_epf: item.employee_epf,
-                    employee_socso: item.employee_socso,
-                    employer_eis: item.employer_eis,
-                    employer_epf: item.employer_epf,
-                    employer_socso: item.employer_socso,
-                    gross_salary: item.gross_salary,
-                    net_salary: item.net_salary,
-                    pcb: item.pcb,
-                    total_deduction: item.total_deduction,
-                    total_eis: item.total_eis,
-                    total_epf: item.total_epf,
-                    total_socso: item.total_socso,
-                })
-                console.log("Write complete for: ", item.name)
-            })
-        })
-    }
-
     const processStatement = async () => {
 
         if (list.length === 0) console.log("LIST IS EMPTY")
@@ -118,54 +97,119 @@ const PayrollView = () => {
         setProcessingReport(true)
 
         let bankList = []
+        var sessionID = ""
 
-        var getDetails = new Promise((resolve, reject) => {
+        await addDoc(collection(db, "history"), {
+            title: "Payroll for " + currentMonthLong.slice(0, 1) + currentMonthLong.slice(1, currentMonthLong.length).toLowerCase() + " " + currentYear,
+            date: moment().format('D MMM YYYY - h:mm a'),
+            activity: "write"
+        }).then((data) => {
+            console.log("ID: " + data.id)
+            sessionID = data.id
+        }).then(() => {
             list.forEach(async(data, index) => {
+    
+                const month = currentMonthLong + " " + currentYear
 
                 const q = query(staffRef, where("name", "==", data.name))
-    
+                let docID = ""
+
                 const querySnapshot = await getDocs(q)
                 querySnapshot.forEach(async(queryDoc) => {
                     bankList.push({
                         name: data.name,
-                        id: queryDoc.id,
-                        epf: {
-                            no: queryDoc.data()['epf-no'],
-                            total: data.total_epf
-                        },
-                        socso: {
-                            no:  queryDoc.data()['socso-no'],
-                            total: data.total_socso
-                        },
-                        eis: {
-                            no: queryDoc.data()['eis-no'],
-                            total: data.total_eis
-                        },
-                        tax: {
-                            no: queryDoc.data()['income-tax-no'],
-                            cp38: data.cp38,
-                            pcn: data.pcb
-                        },
+                        ic_no: queryDoc.id,
+                        religion: queryDoc.data().religion,
+                        position: queryDoc.data().position,
+                        sessionID: sessionID,
+                        month: currentMonthLong + " " + currentYear,
                         bank: {
                             no: queryDoc.data()['bank-no'],
                         },
-                        netSalary: data.net_salary
+                        salary: {
+                            overtime: "0.00",
+                            claims: "0.00",
+                            allowance: "0.00",
+                            net: parseFloat(data.net_salary).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            basic: parseFloat(data.basic_salary).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            gross: parseFloat(data.gross_salary).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})
+                        },
+                        epf: {
+                            no: queryDoc.data()['epf-no'],
+                            total: parseFloat(data.total_epf).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            employee: parseFloat(data.employee_epf).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            employer: parseFloat(data.employer_epf).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                        },
+                        socso: {
+                            no:  queryDoc.data()['socso-no'],
+                            total: parseFloat(data.total_socso).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            employee: parseFloat(data.employee_socso).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            employer: parseFloat(data.employer_socso).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                        },
+                        eis: {
+                            no: queryDoc.data()['eis-no'],
+                            total: parseFloat(data.total_eis).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            employee: parseFloat(data.employee_eis).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            employer: parseFloat(data.employer_eis).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                        },
+                        tax: {
+                            no: queryDoc.data()['income-tax-no'],
+                            cp38: parseFloat(data.cp38).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                            pcb: parseFloat(data.pcb).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})
+                        },
+                        zakat: "0.00",
+                        baitulmal: "0.00",
+                        others: parseFloat(data.other_deduction).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                        total_deduction: parseFloat(data.total_deduction).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                        total_employer: (parseFloat(data.employer_epf) + parseFloat(data.employer_socso) + parseFloat(data.employer_eis)).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}),
+                    })
+
+                    const docRef = await addDoc(collection(db, "staffs", queryDoc.id, "pay-record"), {
+                        
+                    }).then((currDoc) => {
+                        setDoc(doc(db, "staffs", queryDoc.id, "pay-record", currDoc.id), {
+                            name: data.name,
+                            id: currDoc.id,
+                            sessionId: sessionID,
+                            month: month,
+                            creationDate: moment().format('D MMM YYYY - h:mm a'),
+                            epf: {
+                                no: queryDoc.data()['epf-no'],
+                                total: data.total_epf
+                            },
+                            socso: {
+                                no:  queryDoc.data()['socso-no'],
+                                total: data.total_socso
+                            },
+                            eis: {
+                                no: queryDoc.data()['eis-no'],
+                                total: data.total_eis
+                            },
+                            tax: {
+                                no: queryDoc.data()['income-tax-no'],
+                                cp38: data.cp38,
+                                pcn: data.pcb
+                            },
+                            zakat: 0,
+                            baitulmal: 0,
+                            bank: {
+                                no: queryDoc.data()['bank-no'],
+                            },
+                            netSalary: data.net_salary
+                        })
                     })
                 })
 
                 if (index + 1 === list.length) {
                     setProcessedList(bankList)
-                    console.log("List: " + processedList)
-                    resolve()
                 }
             });
+        }).then(() => {
+            setDoneReport(true)
+                setProcessingReport(false)
+                console.log("Done process")
         })
 
-        getDetails.then(() => {
-            setDoneReport(true)
-            setProcessingReport(false)
-            console.log("Done process")
-        })
     }
 
     
@@ -195,9 +239,10 @@ const PayrollView = () => {
 
                 <div className="payroll-header-row">
                     <div className="cycle-selector" id={isSelectingMonth ? "selected-month-active" : "selected-month-inactive"} ref={node} onMouseDown={setSelectMonthState}>
+                        <FcCalendar id="cycle-leading"/>
+                        <p>{currentMonthLong}</p>
+                        <p id="current-year">{currentYear}</p>
                         
-                        <p>{currentMonth}</p>
-                        <FcCalendar id="cycle-trailing"/>
                     </div>
 
                     <div id="button-wrapper">
@@ -218,13 +263,24 @@ const PayrollView = () => {
                 </div>
 
                 {isSelectingMonth && <div className="month-picker" ref={node}>
-                    {monthList.map((month, index) => {
-                        return <div key={index} id="month-canvas" onClick={() => {selectMonth(month)}} >
-                            <p className="month">
-                                {month}
-                            </p>
+                    <div className="month-picker-header">
+                        <div className="month-arrow-wrapper" onMouseUp={decreaseYear}>
+                            <BsChevronLeft className="month-arrow"/>
                         </div>
-                    })}
+                        <p>{currentYear}</p>
+                        <div className="month-arrow-wrapper" onMouseUp={increaseYear}>
+                            <BsChevronRight className="month-arrow"/>
+                        </div>
+                    </div>
+                    <div className="month-picker-body">
+                        {monthList.map((month, index) => {
+                            return <div key={index} className="month-canvas" id={currentMonth === month ? "selected-month" : "unselected-month"} onClick={() => {selectMonth(index)}} >
+                                <p className="month">
+                                    {month}
+                                </p>
+                            </div>
+                        })}
+                    </div>
                 </div>}
 
                 <div className="payroll-view-table">

@@ -11,9 +11,11 @@ class BankStatementGenerator {
 
         doc
         .fontSize(12)
+        .font('fonts/OpenSans-Bold.ttf')
         .text("SRIBIMA OFFSHORE CATERING SERVICES SDN BHD (148292-P)", 50, 50, {bold: true})
-        .fontSize(11)
-        .text("SALARY STATEMENT OCTOBER", 50, 66)
+        .fontSize(10)
+        .font('fonts/OpenSans-Regular.ttf')
+        .text(`SALARY STATEMENT ${this.list[0].month}`, 50, 66)
 
     }
 
@@ -47,8 +49,8 @@ class BankStatementGenerator {
         doc
         .fontSize(10)
         .text(item.name, nameX, currentY)
-        .text(item.id, idX, currentY)
-        .text(item.netSalary, amountX, currentY)
+        .text(item.ic_no, idX, currentY)
+        .text(item.salary['net'], amountX, currentY)
         .text(item.bank.no, bankNoX, currentY)
 
         currentY = currentY + 25

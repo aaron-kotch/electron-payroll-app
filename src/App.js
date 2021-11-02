@@ -4,10 +4,11 @@ import Sidebar from "./Sidebar";
 import Quickbar from './QuickBar'
 import './App.css';
 import { useState } from "react";
-import DatabaseView from "./DatabaseView";
+import DatabaseView from "./Database/DatabaseView";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { userContext } from "./UserContext";
+import HistoryView from "./History/HistoryView";
 
 const App = () => {
 
@@ -63,7 +64,8 @@ const App = () => {
           <div className="main-content">
 
             {currentView === "payroll" && <PayrollView />}
-            {currentView === "database" && <DatabaseView />}
+            {currentView === "records" && <DatabaseView />}
+            {currentView === "history" && <HistoryView />}
 
             {/* {isOpen && <Popup handleList={handleAddList} handleClose={togglePopup}/>} */}
           </div>

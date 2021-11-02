@@ -24,6 +24,38 @@ const PayrollReport = ({ payrollList, isOpen }) => {
         })
     }
 
+    const generateSocsoStatement = (list) => {
+        ipcRenderer.invoke('generate-socso-statement', list).then((result) => {
+            console.log("RESULT: " + result)
+        })
+    }
+
+    const generateEisStatement = (list) => {
+        ipcRenderer.invoke('generate-eis-statement', list).then((result) => {
+            console.log("RESULT: " + result)
+        })
+    }
+
+    const generateBaitulmalStatement = (list) => {
+        ipcRenderer.invoke('generate-baitulmal-statement', list).then((result) => {
+            console.log("RESULT: " + result)
+        })
+    }
+
+    const generateZakatStatement = (list) => {
+        ipcRenderer.invoke('generate-zakat-statement', list).then((result) => {
+            console.log("RESULT: " + result)
+        })
+    }
+
+    const generatePaySlip = (staff) => {
+
+        ipcRenderer.invoke('generate-payslip', staff).then((result) => {
+            console.log("RESULT: " + result)
+        })
+
+    }
+
     return <div className="payroll-report-wrapper">
         <SimpleBar style={{ height: '100vh' }}>
             <div className="payroll-report">
@@ -75,7 +107,7 @@ const PayrollReport = ({ payrollList, isOpen }) => {
                         </div>
                         <h6>SOCSO</h6>
                     </div>
-                    <div className="view-button">
+                    <div className="view-button" onMouseUp={() => {generateSocsoStatement(payrollList)}}>
                         <p>VIEW</p>
                     </div>
                 </div>
@@ -87,7 +119,7 @@ const PayrollReport = ({ payrollList, isOpen }) => {
                         </div>
                         <h6>EIS</h6>
                     </div>
-                    <div className="view-button">
+                    <div className="view-button" onMouseUp={() => {generateEisStatement(payrollList)}}>
                         <p>VIEW</p>
                     </div>
                 </div>
@@ -99,7 +131,19 @@ const PayrollReport = ({ payrollList, isOpen }) => {
                         </div>
                         <h6>BAITULMAL</h6>
                     </div>
-                    <div className="view-button">
+                    <div className="view-button" onMouseUp={() => {generateBaitulmalStatement(payrollList)}}>
+                        <p>VIEW</p>
+                    </div>
+                </div>
+
+                <div className="row-space-between">
+                    <div className="view-row">
+                        <div className="icon-wrapper">
+                            <FcDocument id="folder-icon" />
+                        </div>
+                        <h6>ZAKAT</h6>
+                    </div>
+                    <div className="view-button" onMouseUp={() => {generateZakatStatement(payrollList)}}>
                         <p>VIEW</p>
                     </div>
                 </div>
@@ -117,6 +161,20 @@ const PayrollReport = ({ payrollList, isOpen }) => {
                 </div>
 
                 <h5 id="section-title">Individual Payslip</h5>
+
+                {payrollList.map((item) => {
+                    return <div className="row-space-between">
+                        <div className="view-row">
+                            <div className="icon-wrapper">
+                                <FcDocument id="folder-icon" />
+                            </div>
+                            <h6>{item.name}</h6>
+                        </div>
+                        <div className="view-button" onMouseUp={() => generatePaySlip(item)}>
+                            <p>VIEW</p>
+                        </div>
+                    </div>
+                })}
             </div>
         </SimpleBar>
     </div>

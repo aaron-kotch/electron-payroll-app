@@ -1,7 +1,7 @@
 const fs = require('fs');
 const PDFGenerator = require('pdfkit')
 
-class EPFGenerator {
+class SOCSOGenerator {
 
     constructor(list) {
         this.list = list
@@ -15,7 +15,7 @@ class EPFGenerator {
         .text("SRIBIMA OFFSHORE CATERING SERVICES SDN BHD (148292-P)", 50, 50, {bold: true})
         .fontSize(10)
         .font('fonts/OpenSans-Regular.ttf')
-        .text(`EPF STATEMENT FOR ${this.list[0].month}`, 50, 66)
+        .text(`SOCSO STATEMENT ${this.list[0].month}`, 50, 66)
 
     }
 
@@ -24,8 +24,8 @@ class EPFGenerator {
         const tableHeader = 125
         const nameX = 50
         const idX = 250
-        const totalX = 350
-        const epfNoX = 450
+        const amountX = 350
+        const bankNoX = 450
 
         doc.moveTo(50, 110)
             .lineTo(595 - 50, 110)
@@ -33,10 +33,10 @@ class EPFGenerator {
 
         doc
         .fontSize(10)
-        .text('Name', nameX, tableHeader, {bold: true})
+        .text('Name', nameX, tableHeader)
         .text('IC No.', idX, tableHeader)
-        .text('Amount (RM)', totalX, tableHeader)
-        .text('Epf No.', epfNoX, tableHeader)
+        .text('Amount (RM)', amountX, tableHeader)
+        .text('Account No.', bankNoX, tableHeader)
 
         doc.moveTo(50, 145)
         .lineTo(594 - 50, 145)
@@ -50,8 +50,8 @@ class EPFGenerator {
         .fontSize(10)
         .text(item.name, nameX, currentY)
         .text(item.ic_no, idX, currentY)
-        .text(item.epf['employee'], totalX, currentY)
-        .text(item.epf['no'], epfNoX, currentY)
+        .text(item.socso['employee'], amountX, currentY)
+        .text(item.socso['no'], bankNoX, currentY)
 
         currentY = currentY + 25
 
@@ -64,7 +64,7 @@ class EPFGenerator {
             size: [595, 842]
         })
     
-        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/epf.pdf'))
+        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/socso.pdf'))
 
         this.generateHeader(output)
         this.generateTable(output)
@@ -76,4 +76,4 @@ class EPFGenerator {
 
 }
 
-module.exports = EPFGenerator
+module.exports = SOCSOGenerator

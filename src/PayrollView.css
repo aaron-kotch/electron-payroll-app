@@ -6,6 +6,7 @@
 .view {
     padding: 36px 40px;
     user-select: none;
+    max-width: 1200px;
 }
 
 .view-title {
@@ -35,7 +36,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 16px;
     border-right: solid #EBEBEB 1.5px;
 }
 
@@ -55,8 +56,11 @@
     transition: box-shadow 0.15s ease-out;
 }
 
+#current-year {
+    margin-left: 4px;
+}
+
 .month-picker {
-    cursor: pointer;
     position: absolute;
     display: flex;
     flex-wrap: wrap;
@@ -66,23 +70,86 @@
     background-color: #FFFFFF;
     margin-top: 4px;
     border-radius: 8px;
-    padding: 8px;
     box-shadow: 0px 8px 24px rgba(112, 144, 176, 0.15);
 }
 
-#month-canvas {
+.month-picker-header {
     display: flex;
-    height: 64px;
-    width: 64px;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    width: 100%;
+    background-color: #52AA5E;
+    padding: 16px 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.month-picker-header p {
+    font-size: 15px;
+    font-weight: 500;
+    color: #FFF;
+}
+
+.month-arrow-wrapper {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.15s ease;
+}
+
+.month-arrow-wrapper:hover {
+    background-color: #81c784;
+    transition: background-color 0.15s ease;
+}
+
+.month-arrow-wrapper:active {
+    background-color: #388e3c;
+    transition: background-color 0.15s ease;
+}
+
+
+.month-arrow {
+    color: #FFF;
+    font-size: 15px;
+}
+
+.month-picker-body {
+    cursor: pointer;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.month-canvas {
+    display: flex;
+    height: 56px;
+    width: 56px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
     border-radius: 50%;
 }
 
-#month-canvas:hover {
+.month-canvas:hover {
     background-color: #F3F5F7;
     color: #52AA5E;
+}
+
+#selected-month {
+    background-color: #52AA5E;
+}
+
+#selected-month p {
+    color: #FFF;
 }
 
 .month {
@@ -92,7 +159,7 @@
 
 #cycle-leading {
     font-size: 16px;
-    margin-right: 16px;
+    margin-right: 12px;
     color: #B1B9C1;
 }
 

@@ -12,6 +12,7 @@
     user-select: none;
     padding: 0 28px;
     border-right: solid #E6E7EE thin;
+    z-index: 10;
 }
 
 .sidebar-title {

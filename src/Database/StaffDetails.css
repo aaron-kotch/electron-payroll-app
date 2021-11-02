@@ -1,0 +1,151 @@
+.staff-details-wrapper {
+    padding: 36px 32px;
+    user-select: none;
+}
+
+#staff-header {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#staff-position {
+    font-size: 15px;
+    color: #B1B9C1;
+}
+
+.staff-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.empty-staff-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.empty-staff-view h6 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 16px;
+}
+
+.empty-staff-view p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #B1B9C1;
+}
+
+.empty-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    background-color: rgb(110, 197, 184, 0.2);
+    border-radius: 50%;
+}
+
+#empty-icon {
+    font-size: 40px;
+}
+
+.staff-details-panel {
+    position: relative;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 28px 32px;
+    margin-top: 28px;
+    border-radius: 8px;
+}
+
+.staff-details-panel h5 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.staff-details-panel h6 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #62646D;
+}
+
+.staff-details-panel p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.panel-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-column {
+    margin-right: 56px;
+    margin-bottom: 24px;
+}
+
+.panel-row .panel-column {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border: solid #E6E7EE thin;
+    margin: 0;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+.staff-settings-wrapper {
+    cursor: pointer;
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.staff-settings-wrapper:hover {
+   background-color: #F3F5F7;
+}
+
+#staff-section-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+
+.record-wrapper {
+    border-radius: 8px;
+    background-color: #FFF;
+}
+
+.record-tile {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 24px 28px;
+}
+
+#drop-icon {
+    font-size: 12px;
+    margin-left: 16px;
+}

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const PDFGenerator = require('pdfkit')
 
-class EPFGenerator {
+class BaitulmalGenerator {
 
     constructor(list) {
         this.list = list
@@ -15,7 +15,7 @@ class EPFGenerator {
         .text("SRIBIMA OFFSHORE CATERING SERVICES SDN BHD (148292-P)", 50, 50, {bold: true})
         .fontSize(10)
         .font('fonts/OpenSans-Regular.ttf')
-        .text(`EPF STATEMENT FOR ${this.list[0].month}`, 50, 66)
+        .text(`BAITULMAL STATEMENT FOR ${this.list[0].month}`, 50, 66)
 
     }
 
@@ -35,8 +35,7 @@ class EPFGenerator {
         .fontSize(10)
         .text('Name', nameX, tableHeader, {bold: true})
         .text('IC No.', idX, tableHeader)
-        .text('Amount (RM)', totalX, tableHeader)
-        .text('Epf No.', epfNoX, tableHeader)
+        .text('Amount (RM)', epfNoX, tableHeader)
 
         doc.moveTo(50, 145)
         .lineTo(594 - 50, 145)
@@ -46,14 +45,16 @@ class EPFGenerator {
 
         this.list.forEach(item => {
 
-        doc
-        .fontSize(10)
-        .text(item.name, nameX, currentY)
-        .text(item.ic_no, idX, currentY)
-        .text(item.epf['employee'], totalX, currentY)
-        .text(item.epf['no'], epfNoX, currentY)
+        if (item.religion === "Muslim") {
 
-        currentY = currentY + 25
+            doc
+            .fontSize(10)
+            .text(item.name, nameX, currentY)
+            .text(item.ic_no, idX, currentY)
+            .text(item.baitulmal, epfNoX, currentY)
+
+            currentY = currentY + 25
+        }
 
         });
     }
@@ -61,10 +62,10 @@ class EPFGenerator {
     generate() {
 
         let output = new PDFGenerator({
-            size: [595, 842]
+            size: 'A4'
         })
     
-        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/epf.pdf'))
+        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/zakat.pdf'))
 
         this.generateHeader(output)
         this.generateTable(output)
@@ -76,4 +77,4 @@ class EPFGenerator {
 
 }
 
-module.exports = EPFGenerator
+module.exports = BaitulmalGenerator
