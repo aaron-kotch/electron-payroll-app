@@ -1,5 +1,6 @@
 const fs = require('fs');
 const PDFGenerator = require('pdfkit')
+const homeDir = require('os').homedir()
 
 class ZakatGenerator {
 
@@ -65,7 +66,7 @@ class ZakatGenerator {
             size: 'A4'
         })
     
-        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/zakat.pdf'))
+        output.pipe(fs.createWriteStream(`${homeDir}/Desktop/zakat.pdf`))
 
         this.generateHeader(output)
         this.generateTable(output)

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const PDFGenerator = require('pdfkit')
+const homeDir = require('os').homedir()
 
 class PaySlipGenerator {
 
@@ -303,7 +304,7 @@ class PaySlipGenerator {
             margin: 0
         })
     
-        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/payslip.pdf'))
+        output.pipe(fs.createWriteStream(`${homeDir}/Desktop/${this.staff.ic_no}-payslip.pdf`))
 
         this.generateHeader(output)
         this.generateTable(output)

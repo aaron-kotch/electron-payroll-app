@@ -1,5 +1,6 @@
 const fs = require('fs');
 const PDFGenerator = require('pdfkit')
+const homeDir = require('os').homedir()
 
 class EISGenerator {
 
@@ -64,7 +65,7 @@ class EISGenerator {
             size: [595, 842]
         })
     
-        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/eis.pdf'))
+        output.pipe(fs.createWriteStream(`${homeDir}/Desktop/eis.pdf`))
 
         this.generateHeader(output)
         this.generateTable(output)

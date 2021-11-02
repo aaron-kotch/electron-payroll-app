@@ -1,5 +1,6 @@
 const fs = require('fs');
 const PDFGenerator = require('pdfkit')
+const homeDir = require('os').homedir()
 
 class EPFGenerator {
 
@@ -64,7 +65,7 @@ class EPFGenerator {
             size: [595, 842]
         })
     
-        output.pipe(fs.createWriteStream('C:/Users/aaron/Desktop/epf.pdf'))
+        output.pipe(fs.createWriteStream(`${homeDir}/Desktop/epf.pdf`))
 
         this.generateHeader(output)
         this.generateTable(output)
